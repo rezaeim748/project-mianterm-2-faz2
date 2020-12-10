@@ -18,5 +18,27 @@ public class Class {
         students = new ArrayList<>() ;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public int getUnitsNumber() {
+        return unitsNumber;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
 }
