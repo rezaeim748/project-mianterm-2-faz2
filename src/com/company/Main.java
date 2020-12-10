@@ -36,8 +36,13 @@ public class Main {
                 if (!otherClass.equals(class1)) {
                     classes.add(otherClass);
                 }
+                else {
+                    for (Student student : class1.getStudents()){
+                        student.getClasses().remove(class1) ;
+                    }
+                }
             }
-        } catch (IOException | ClassNotFoundException e){
+        } catch (IOException | ClassNotFoundException | NullPointerException e){
         }
         try {
             in.close() ;
@@ -59,9 +64,60 @@ public class Main {
         }
         try {
             out.close() ;
+        } catch (IOException | NullPointerException e){
+        }
+
+    }
+
+    public static ArrayList<Student> getStudents (){
+        ArrayList<Student> students = new ArrayList<>() ;
+        ObjectInputStream in = null ;
+        try {
+            in = new ObjectInputStream(new FileInputStream(new File("./../files/students")));
         } catch (IOException e){
         }
-        
+        try {
+            while (true) {
+                Student student = (Student) in.readObject();
+                students.add(student);
+            }
+        } catch (IOException | ClassNotFoundException e){
+        }
+
+        return students ;
+    }
+
+    public static ArrayList<Teacher> getTeachers (){
+        ArrayList<Teacher> teachers = new ArrayList<>() ;
+        ObjectInputStream in = null ;
+        try {
+            in = new ObjectInputStream(new FileInputStream(new File("./../files/teachers")));
+        } catch (IOException e){
+        }
+        try {
+            while (true) {
+                Teacher teacher = (Teacher) in.readObject();
+                teachers.add(teacher);
+            }
+        } catch (IOException | ClassNotFoundException e){
+        }
+
+        return teachers ;
+    }
+
+    public static Admin getAdmin (){
+        Admin admin = null ;
+        ObjectInputStream in = null ;
+        try {
+            in = new ObjectInputStream(new FileInputStream(new File("./../files/admin")));
+        } catch (IOException e){
+        }
+        try {
+            admin = (Admin) in.readObject();
+        } catch (IOException | ClassNotFoundException e){
+        }
+
+        return admin ;
     }
 
 

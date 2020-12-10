@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 import static com.company.Main.addClassToFile;
+import static com.company.Main.removeClassFromFile;
 
 public class Teacher {
     private String username ;
@@ -39,9 +40,10 @@ public class Teacher {
 
     public void removeClass (Class class1){
         classes.remove(class1) ;
+        removeClassFromFile(class1) ;
     }
 
-    public static boolean isAddingClassAllowed (Class class1){
+    public boolean isAddingClassAllowed (Class class1){
         boolean isAllowed = true ;
         ObjectInputStream in = null ;
         try {
@@ -51,8 +53,10 @@ public class Teacher {
         try {
             while (true){
                 Class otherClass = (Class) in.readObject() ;
-                if (((class1.getStartTime() > otherClass.getStartTime()) && (class1.getStartTime() < otherClass.getFinishTime())) || ((class1.getFinishTime() > otherClass.getStartTime()) && (class1.getFinishTime() < otherClass.getFinishTime()))){
-                    isAllowed = false ;
+                if (otherClass.getTeacher().equals(this)) {
+                    if (((class1.getStartTime() > otherClass.getStartTime()) && (class1.getStartTime() < otherClass.getFinishTime())) || ((class1.getFinishTime() > otherClass.getStartTime()) && (class1.getFinishTime() < otherClass.getFinishTime()))) {
+                        isAllowed = false;
+                    }
                 }
             }
         } catch (IOException | ClassNotFoundException e){
@@ -63,6 +67,13 @@ public class Teacher {
         }
 
         return isAllowed ;
+    }
+
+    public boolean equals (Teacher teacher){
+        if (this.username.equals(teacher.getUsername())){
+            return true ;
+        }
+        return false ;
     }
 
 
