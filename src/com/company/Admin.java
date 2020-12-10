@@ -10,5 +10,20 @@ public class Admin {
         this.password = password ;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String[] getMeals() {
+        return meals;
+    }
+
+    public void setPassword (String password){
+        this.password = password ;
+    }
 
 }
