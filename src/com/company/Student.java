@@ -60,7 +60,9 @@ public class Student {
     }
 
     public void addClass (Class class1){
+        class1.getStudents().add(this) ;
         classes.put(class1, 0) ;
+        unitsNumber += class1.getUnitsNumber() ;
     }
 
     public void setScore (Class class1, int score){
@@ -82,5 +84,14 @@ public class Student {
     public void decreaseCardBalance (int amount){
         cardBalance -= amount ;
     }
+
+    public void setReservedDays (boolean[] reservedDays){ this.reservedDays = reservedDays ; }
+
+    public void removeClass (Class class1){
+        class1.getStudents().remove(this) ;
+        classes.remove(class1) ;
+        unitsNumber -= class1.getUnitsNumber() ;
+    }
+
 
 }

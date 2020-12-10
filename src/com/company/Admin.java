@@ -26,4 +26,8 @@ public class Admin {
         this.password = password ;
     }
 
+    public void setMeals (String[] meals){
+        this.meals = meals ;
+    }
+
 }
